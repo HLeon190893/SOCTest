@@ -14,7 +14,6 @@ public abstract class TelaWeb {
 		driver = DriverFactory.getDriver();
 	}
 
-	
 	public WebElement encontrarElementoPorClasse(String classe) {
 		return driver.findElement(By.className(classe));
 	}
