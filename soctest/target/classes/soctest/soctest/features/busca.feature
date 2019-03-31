@@ -4,7 +4,7 @@ Funcionalidade: Busca
 	Esquema do Cenário: Busca no blog com sucesso
 	Dado que eu estou no site do blog da SOC
 	Quando eu utilizar a barra de busca para pesquisar sobre "<artigo>"
-	Então eu conseguirei acessar o artigo retornado
+	Então eu conseguirei acessar o  artigo "<artigo>"
 	
 	Exemplos:
 	| artigo |

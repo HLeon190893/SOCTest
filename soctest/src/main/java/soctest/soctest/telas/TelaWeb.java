@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import exceptions.ExecucaoTesteException;
 import factory.DriverFactory;
 
 public abstract class TelaWeb {
@@ -18,8 +19,12 @@ public abstract class TelaWeb {
 		return driver.findElement(By.className(classe));
 	}
 	
-	public WebElement encontrarElementoPorLinkText(String link) {
-		return driver.findElement(By.linkText(link));
+	public WebElement encontrarElementoPorLinkText(String link) throws ExecucaoTesteException {
+		try {
+			return driver.findElement(By.linkText(link));
+		} catch (Exception e) {
+			throw new ExecucaoTesteException(e);
+		}
 	}
 	
 }

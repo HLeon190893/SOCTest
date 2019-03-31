@@ -2,6 +2,8 @@ package soctest.soctest.telas;
 
 import org.openqa.selenium.WebElement;
 
+import exceptions.ExecucaoTesteException;
+
 public class TelaSocBlog extends TelaWeb{
 	
 	public WebElement buscarBotaoLimpar() {
@@ -16,7 +18,7 @@ public class TelaSocBlog extends TelaWeb{
 		return encontrarElementoPorClasse("lupa-form");
 	}
 	
-	public WebElement buscarLinkArtigo(String text) {
+	public WebElement buscarLinkArtigo(String text) throws ExecucaoTesteException {
 		return encontrarElementoPorLinkText(text);
 	}
 
