@@ -11,5 +11,13 @@ public class TelaSocBlog extends TelaWeb{
 	public WebElement buscarCampoPesquisa() {
 		return encontrarElementoPorClasse("form-control");
 	}
+	
+	public WebElement buscarBotaoPesquisar() {
+		return encontrarElementoPorClasse("lupa-form");
+	}
+	
+	public WebElement buscarLinkArtigo(String text) {
+		return encontrarElementoPorLinkText(text);
+	}
 
 }

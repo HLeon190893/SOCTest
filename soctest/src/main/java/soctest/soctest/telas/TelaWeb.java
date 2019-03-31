@@ -18,7 +18,8 @@ public abstract class TelaWeb {
 		return driver.findElement(By.className(classe));
 	}
 	
-	public void inserirTexto(WebElement elemento, String texto) {
-		elemento.sendKeys(texto);
+	public WebElement encontrarElementoPorLinkText(String link) {
+		return driver.findElement(By.linkText(link));
 	}
+	
 }
