@@ -21,5 +21,9 @@ public class TelaSocBlog extends TelaWeb{
 	public WebElement buscarLinkArtigo(String text) throws ExecucaoTesteException {
 		return encontrarElementoPorLinkText(text);
 	}
+	
+	public WebElement buscarTextRetornoVazio() {
+		return encontrarElementoPorClasse("col-md-9");
+	}
 
 }

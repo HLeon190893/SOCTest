@@ -27,4 +27,11 @@ public abstract class TelaWeb {
 		}
 	}
 	
+	public WebElement encontrarElementoPorXPath(String xpath) throws ExecucaoTesteException {
+		try {
+			return driver.findElement(By.xpath(xpath));
+		} catch (Exception e) {
+			throw new ExecucaoTesteException(e);
+		}
+	}
 }
