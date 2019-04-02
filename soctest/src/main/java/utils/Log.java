@@ -20,9 +20,17 @@ public class Log{
 	
 	private static final Logger LOGGER = Logger.getLogger(Steps.class.getName());
 	
+	/*
+	 *	 Método para imprimir LOG no console 
+	 */
+	
 	public static void LogInfo(String texto) {
 		LOGGER.info(texto);
 	}
+	
+	/*
+	 *	 Método para tirar screenshot da execução de teste
+	 */
 	
 	public static void takeScreenShot(Scenario scenario) throws WebDriverException, ExecucaoTesteException, IOException {
 		File sourcePath = ((TakesScreenshot)DriverFactory.getDriver()).getScreenshotAs(OutputType.FILE);
@@ -30,6 +38,10 @@ public class Log{
 		Files.copy(sourcePath, destinationPath);
 		Reporter.addScreenCaptureFromPath(destinationPath.toString());
 	}
+	
+	/*
+	 *	 Método para adicionar um LOG no relatório, e imprimí-lo no console  
+	 */
 	
 	public static void addStepReport(String texto) {
 		Reporter.addStepLog(texto);

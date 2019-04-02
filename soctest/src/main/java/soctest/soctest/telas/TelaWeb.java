@@ -11,13 +11,25 @@ public abstract class TelaWeb {
 	
 	WebDriver driver;
 	
+	/*
+	 *	 Construtor da TelaWeb  
+	 */
+	
 	public TelaWeb() {
 		driver = DriverFactory.getDriver();
 	}
+	
+	/*
+	 *	 Método para encontrar elemento por classe
+	 */
 
 	public WebElement encontrarElementoPorClasse(String classe) {
 		return driver.findElement(By.className(classe));
 	}
+	
+	/*
+	 *	 Método para retornar elemento por link text  
+	 */
 	
 	public WebElement encontrarElementoPorLinkText(String link) throws ExecucaoTesteException {
 		try {
@@ -26,6 +38,10 @@ public abstract class TelaWeb {
 			throw new ExecucaoTesteException(e);
 		}
 	}
+	
+	/*
+	 *	 Método para retornar elemento por xpath  
+	 */
 	
 	public WebElement encontrarElementoPorXPath(String xpath) throws ExecucaoTesteException {
 		try {

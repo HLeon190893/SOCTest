@@ -25,6 +25,12 @@ public class Steps {
 	TelaArtigo telaArtigo;
 	Scenario scenario;
 	
+	
+	/*
+	 *	 @Before roda antes de cada cenário
+	 *	 Inicializa o Driver e as telas da funcionalidade busca
+	 */
+	
 	@Before
 	public void iniciarDriver(Scenario scenario) {
 		DriverFactory.initDriver();
@@ -35,11 +41,20 @@ public class Steps {
 		telaArtigo = new TelaArtigo();
 	}
 	
+	
+	/*
+	 *	 Step: Acessar o site do blog da SOC  
+	 */
+	
 	@Given("^que eu estou no site do blog da SOC$")
 	public void que_eu_estou_no_site_do_blog_da_SOC() throws ExecucaoTesteException {
 		Log.addStepReport("Acessando a página SOC Blog.");
 		DriverFactory.getDriver().get("https://ww2.soc.com.br/blog/");
 	}
+	
+	/*
+	 *	 Step: Pesquisar na barra de busca sobre o parâmetro 
+	 */
 	
 	@When("^eu utilizar a barra de busca para pesquisar sobre \"([^\"]*)\"$")
 	public void eu_utilizar_a_barra_de_busca_para_pesquisar_sobre(String artigo) throws Throwable {
@@ -48,13 +63,22 @@ public class Steps {
 		Log.addStepReport("Clicando no botão pesquisar");
 		tela.buscarBotaoPesquisar().click();
 	}
+	
+	/*
+	 *	 Step: Utilizar a barra de pesquisa para pesquisar com retorno negativo  
+	 */
 
-	@Then("^eu utilizar a barra de busca para pesquisar sobre um artigo inexistente")
+	@When("^eu utilizar a barra de busca para pesquisar sobre um artigo inexistente")
 	public void eu_utilizar_a_barra_de_busca_para_pesquisar_sobre_um_artigo_inexistente() throws ExecucaoTesteException {
 		Log.addStepReport("Pesquisando no blog.");
 		tela.buscarCampoPesquisa().sendKeys("Clicando no botão pesquisar");
 		tela.buscarBotaoPesquisar().click();
 	}
+	
+	
+	/*
+	 *	 Step: Acessar o artigo e verificar título  
+	 */
 	
 	@Then("^eu conseguirei acessar o  artigo \"([^\"]*)\"$")
 	public void eu_conseguirei_acessar_o_artigo(String artigo) throws ExecucaoTesteException {
@@ -64,11 +88,19 @@ public class Steps {
 		Assert.assertEquals(artigo, telaArtigo.acharTituloArtigo().getText());
 	}
 	
+	/*
+	 *	 Step: Verifica a busca sem resultados  
+	 */
+	
 	@Then("^eu terei a mensagem de retorno negativa$")
 	public void eu_terei_a_mensagem_de_retorno_negativa() throws ExecucaoTesteException {
 		Log.addStepReport("Verificando se houve retorno na busca.");
 	   Assert.assertEquals("Nenhum post encontrado. Tente uma busca diferente", tela.buscarTextRetornoVazio().getText());
 	}
+	
+	/*
+	 *	 Step: Preenche a barra de busca do blog da SOC 
+	 */
 	
 	@Given("^que a barra de pesquisa esteja preenchida$")
 	public void que_a_barra_de_pesquisa_esteja_preenchida() throws ExecucaoTesteException {
@@ -76,18 +108,31 @@ public class Steps {
 		Log.addStepReport("Preenchendo campo de pesquisa.");
 		tela.buscarCampoPesquisa().sendKeys("Teste de preenchimento");
 	}
+	
+	/*
+	 *	 Step: Clicar no botão limpar 
+	 */
 
 	@When("^eu clicar o botão Limpar$")
 	public void eu_clicar_o_botão_Limpar() throws ExecucaoTesteException {
 		Log.addStepReport("Clicando no botão Limpar");
 		tela.buscarBotaoLimpar().click();
 	}
-
+	
+	/*
+	 *	 Step: Assert na barra de pesquisas
+	 */
+	
 	@Then("^a barra de pesquisa voltará a ficar em branco$")
 	public void a_barra_de_pesquisa_voltará_a_ficar_em_branco() throws ExecucaoTesteException {
 		Log.addStepReport("Verificando conteúdo da barra de busca.");
 		Assert.assertEquals("", tela.buscarCampoPesquisa().getText());
 	}
+	
+	/*
+	 *	 @After roda após cada cenário.
+	 *	 Fecha o Driver, e em caso de erro, printa a tela e adiciona a imagem ao relatório
+	 */
 	
 	@After
 	public void tearDown() throws WebDriverException, ExecucaoTesteException, IOException {
