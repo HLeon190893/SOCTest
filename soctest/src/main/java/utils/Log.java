@@ -2,6 +2,8 @@ package utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Formatter;
 import java.util.logging.Logger;
 
 import org.openqa.selenium.OutputType;
@@ -46,6 +48,15 @@ public class Log{
 	public static void addStepReport(String texto) {
 		Reporter.addStepLog(texto);
 		Log.LogInfo(texto);
+	}
+	
+	public static void addHandler() {
+		ConsoleHandler handler = new ConsoleHandler();
+
+		Formatter formatter = new LogFormatter();
+		handler.setFormatter(formatter);        
+
+		LOGGER.addHandler(handler);
 	}
 	
 }

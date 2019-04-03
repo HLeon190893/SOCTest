@@ -19,6 +19,11 @@ Feature: Busca
 	Given que a barra de pesquisa esteja preenchida
 	When eu clicar o botão Limpar
 	Then a barra de pesquisa voltará a ficar em branco
+	
+	Scenario: Busca vazia
+	Given que eu estou no site do blog da SOC
+	When eu clicar no botão pesquisar
+	Then todos os artigos serão retornados
 
 
 	

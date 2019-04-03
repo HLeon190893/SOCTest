@@ -31,10 +31,10 @@ public class TelaSocBlog extends TelaWeb{
 	}
 	
 	/*
-	 *	 Método para retornar WebElement do link de um artigo passado por parâmetro  
+	 *	 Método para retornar WebElement do link text passado por parâmetro  
 	 */
 	
-	public WebElement buscarLinkArtigo(String text) throws ExecucaoTesteException {
+	public WebElement buscarLinkText(String text) throws ExecucaoTesteException {
 		return encontrarElementoPorLinkText(text);
 	}
 	

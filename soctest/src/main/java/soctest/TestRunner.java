@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
+import utils.Log;
 import utils.Utils;
 
 @RunWith(Cucumber.class)
@@ -23,6 +24,7 @@ public class TestRunner {
 
 	@BeforeClass
 	public static void logo() {
+		Log.addHandler();
 		System.out.println(Utils.LOGO);
 	}
 	

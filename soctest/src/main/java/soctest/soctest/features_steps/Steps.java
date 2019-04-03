@@ -53,6 +53,17 @@ public class Steps {
 	}
 	
 	/*
+	 *	 Step: Preenche a barra de busca do blog da SOC 
+	 */
+	
+	@Given("^que a barra de pesquisa esteja preenchida$")
+	public void que_a_barra_de_pesquisa_esteja_preenchida() throws ExecucaoTesteException {
+		this.que_eu_estou_no_site_do_blog_da_SOC();
+		Log.addStepReport("Preenchendo campo de pesquisa.");
+		tela.buscarCampoPesquisa().sendKeys("Teste de preenchimento");
+	}
+	
+	/*
 	 *	 Step: Pesquisar na barra de busca sobre o parâmetro 
 	 */
 	
@@ -75,6 +86,26 @@ public class Steps {
 		tela.buscarBotaoPesquisar().click();
 	}
 	
+	/*
+	 *	 Step: Clicar no botão limpar 
+	 */
+
+	@When("^eu clicar o botão Limpar$")
+	public void eu_clicar_o_botão_Limpar() throws ExecucaoTesteException {
+		Log.addStepReport("Clicando no botão Limpar");
+		tela.buscarBotaoLimpar().click();
+	}
+	
+	/*
+	 *	 Step: Clicar no botão pesquisar 
+	 */
+
+	
+	@When("^eu clicar no botão pesquisar$")
+	public void eu_clicar_no_botão_pesquisar() throws Throwable {
+		Log.addStepReport("Clicando no botão Pesquisar.");
+		tela.buscarBotaoPesquisar().click();
+	}
 	
 	/*
 	 *	 Step: Acessar o artigo e verificar título  
@@ -83,7 +114,7 @@ public class Steps {
 	@Then("^eu conseguirei acessar o  artigo \"([^\"]*)\"$")
 	public void eu_conseguirei_acessar_o_artigo(String artigo) throws ExecucaoTesteException {
 		Log.addStepReport("Clicando no resultado da pesquisa.");
-		tela.buscarLinkArtigo(artigo).click();
+		tela.buscarLinkText(artigo).click();
 		Log.addStepReport("Verificando se o título do artigo condiz com o artigo pesquisado.");
 		Assert.assertEquals(artigo, telaArtigo.acharTituloArtigo().getText());
 	}
@@ -99,27 +130,6 @@ public class Steps {
 	}
 	
 	/*
-	 *	 Step: Preenche a barra de busca do blog da SOC 
-	 */
-	
-	@Given("^que a barra de pesquisa esteja preenchida$")
-	public void que_a_barra_de_pesquisa_esteja_preenchida() throws ExecucaoTesteException {
-		this.que_eu_estou_no_site_do_blog_da_SOC();
-		Log.addStepReport("Preenchendo campo de pesquisa.");
-		tela.buscarCampoPesquisa().sendKeys("Teste de preenchimento");
-	}
-	
-	/*
-	 *	 Step: Clicar no botão limpar 
-	 */
-
-	@When("^eu clicar o botão Limpar$")
-	public void eu_clicar_o_botão_Limpar() throws ExecucaoTesteException {
-		Log.addStepReport("Clicando no botão Limpar");
-		tela.buscarBotaoLimpar().click();
-	}
-	
-	/*
 	 *	 Step: Assert na barra de pesquisas
 	 */
 	
@@ -130,6 +140,21 @@ public class Steps {
 	}
 	
 	/*
+	 *	 Step: Assert no número de páginas no rodapé
+	 */
+	
+	@Then("^todos os artigos serão retornados$")
+	public void todos_os_artigos_serão_retornados() throws Throwable {
+		Log.addStepReport("Verificando retorno da pesquisa.");
+		tela.buscarLinkText("30").click(); tela.buscarLinkText("40").click();
+		tela.buscarLinkText("42").click(); tela.buscarLinkText("43").click();
+		tela.buscarLinkText("45").click(); tela.buscarLinkText("46").click();
+		Log.addStepReport("Verificando último artigo do blog.");
+		tela.buscarLinkText("Equipe AGE empata em eletrizante jogo de futebol society");
+		
+	}
+	
+	/*
 	 *	 @After roda após cada cenário.
 	 *	 Fecha o Driver, e em caso de erro, printa a tela e adiciona a imagem ao relatório
 	 */
@@ -137,7 +162,7 @@ public class Steps {
 	@After
 	public void tearDown() throws WebDriverException, ExecucaoTesteException, IOException {
 		if(scenario.isFailed()) {
-			Log.LogInfo("O cenário falhou. Favor verificar o relatório da execução");
+			Log.LogInfo("O cenário falhou. Favor verificar o relatório da execução.");
 			scenario.write("Erro do cenário " + scenario.getName());
 			Log.takeScreenShot(scenario);
 		}
